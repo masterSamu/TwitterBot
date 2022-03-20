@@ -16,9 +16,10 @@ let strMonths = [
 const getTodayString = () => {
   const now = new Date();
   const strMonth = strMonths[now.getUTCMonth()];
-  const strToday =
-    now.getUTCFullYear() + "-" + strMonth + "-" + now.getUTCDate();
-  return strToday;
+  const strDate = now.getUTCDate() -1;
+  const strYesterday =
+    now.getUTCFullYear() + "-" + strMonth + "-" + strDate;
+  return strYesterday;
 };
 
 module.exports = { getTodayString };

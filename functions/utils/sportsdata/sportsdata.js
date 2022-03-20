@@ -8,31 +8,35 @@ const playerId = 30003131; // id for Patrik Laine
 
 // Adjustments for some statistics, divide statistic with this value
 const adjustmentForStatistic = 1.466;
-const today = dates.getTodayString();
+const yesterday = dates.getTodayString();
+
 
 const getData = async () =>
-  FantasyDataClient.NHLv3StatsClient.getPlayerGameStatsByDatePromise(today)
-    .then((response) => {
-      const data = JSON.parse(response);
-      const player = data.find((item) => item.PlayerID === playerId);
-      let text = "";
-      if (player) {
-        let name = player.Name.replace(/\s/g, "");
-        let goals = Math.round(player.Goals / adjustmentForStatistic);
-        if (goals > 0) {
-          if (goals === 1) {
-            text = "#" + name + " scored a goal!";
-          } else if (goals > 1) {
-            text = "#" + name + " scored " + goals + " goals!";
-          }
+  FantasyDataClient.NHLv3StatsClient.getPlayerGameStatsByPlayerPromise(
+    yesterday,
+    playerId
+  )
+    .then((response) => JSON.parse(response))
+    .then((data) => {
+      let textToReturn = "";
+      if (data) {
+        const name = data.Name.replace(/\s/g, "");
+        const goals = Math.round(data.Goals / adjustmentForStatistic);
+        const assists = Math.round(data.Assists / adjustmentForStatistic);
+        const nameHashtag = `#${name}`;
+        const opponentHashtag = `#${data.Opponent}`;
+
+        const games = data.Games;
+        if (games > 0) {
+          textToReturn = `${nameHashtag} scored ${goals}+${assists} against ${opponentHashtag}`;
+        } else {
+          textToReturn = `${nameHashtag} did not play today against ${opponentHashtag}`;
         }
-      } else {
-        text = "No goals for #PatrikLaine today! Stay tuned, he may score tomorrow!";
       }
-      return text;
+      return textToReturn;
     })
     .catch((e) => {
-      return null;
+      return `@BlueJacketsNHL and @PatrikLaine29 did not play last night. Stay tuned for updates.`;
     });
 
 module.exports = {

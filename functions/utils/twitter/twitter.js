@@ -7,7 +7,6 @@ async function tweet(text) {
   try {
     if (text) {
       const { data: createdTweet } = await client.v2.tweet(text);
-      console.log(createdTweet)
     }
   } catch (e) {
     console.error(e);

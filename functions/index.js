@@ -1,6 +1,6 @@
 require("dotenv").config();
 const functions = require("firebase-functions");
-const admin = require('firebase-admin');
+const admin = require("firebase-admin");
 admin.initializeApp();
 
 const twitter = require("./utils/twitter/twitter");
@@ -10,15 +10,9 @@ const tweet = async () => {
   if (data) {
     twitter.tweet(data);
   }
-  console.log(data)
 };
 
-
-
-exports.tweet = functions.https.onRequest(async (req, res) => {
-    tweet();
-})
-
+// Firebase function call
 exports.tweetDaily = functions.pubsub
   .schedule("every day 9:00")
   .timeZone("Europe/Helsinki")
