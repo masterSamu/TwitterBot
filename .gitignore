@@ -128,3 +128,4 @@ dist
 
 # Firebase
 .firebase*
+functions/firebase-serviceaccount.json
