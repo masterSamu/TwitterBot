@@ -10,6 +10,7 @@ const config = {
   appId: process.env.FIREBASE_APP_ID,
   credential: admin.credential.cert(serviceAccount),
 };
+
 admin.initializeApp(config);
 
 const database = admin.database();
@@ -28,10 +29,15 @@ const readPlayerData = async () => {
     .catch((e) => {
       console.error(e);
       returnData = null;
-    })
+    });
   return returnData;
+};
+
+const updatePlayerData = async (newData) => {
+  await admin.database().ref("/player").update(newData);
 };
 
 module.exports = {
   readPlayerData,
+  updatePlayerData,
 };

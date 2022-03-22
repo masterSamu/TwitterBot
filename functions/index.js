@@ -1,19 +1,12 @@
-require("dotenv").config();/*
+require("dotenv").config();
 const functions = require("firebase-functions");
-const admin = require("firebase-admin");
+/*const admin = require("firebase-admin");
 admin.initializeApp();*/
 
-const hockey = require("./utils/sportsdata/hockeydata");
-
-
-
-
-
-/*
 const twitter = require("./utils/twitter/twitter");
-const sport = require("./utils/sportsdata/sportsdata");
+const hockey = require("./utils/sportsdata/hockeydata");
 const tweet = async () => {
-  const data = await sport.getData();
+  const data = await hockey.getTweetText();
   if (data) {
     twitter.tweet(data);
   }
@@ -26,4 +19,3 @@ exports.tweetDaily = functions.pubsub
   .onRun(async () => {
     tweet();
   });
-*/
