@@ -1,7 +1,5 @@
 require("dotenv").config();
 const functions = require("firebase-functions");
-/*const admin = require("firebase-admin");
-admin.initializeApp();*/
 
 const twitter = require("./utils/twitter/twitter");
 const hockey = require("./utils/sportsdata/hockeydata");

@@ -29,7 +29,7 @@ const calculateLastGameStatistics = async () => {
   if (oldStatistics && newStatistics) {
     const goalDifference = newStatistics.goals - oldStatistics.goals;
     const assistsDifference = newStatistics.assists - oldStatistics.assists;
-    const gamesDifference = newStatistics.assists - oldStatistics.assists;
+    const gamesDifference = newStatistics.games - oldStatistics.games;
     const shotsDifference = newStatistics.shots - oldStatistics.shots;
     const dataDifferenceObject = {
       firstname: oldStatistics.firstname,
@@ -38,6 +38,7 @@ const calculateLastGameStatistics = async () => {
       goals: 0,
       assists: 0,
       shots: 0,
+      games: 0,
     };
 
     if (goalDifference > 0) dataDifferenceObject.goals = goalDifference;
