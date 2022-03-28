@@ -65,14 +65,21 @@ const calculateLastGameStatistics = async () => {
 
 const getTweetText = async () => {
   const data = await calculateLastGameStatistics();
-  let tweetText = "";
-  const nameHashtag = `#${data.firstname}${data.lastname}`;
   if (data.games > 0) {
-    tweetText = `${nameHashtag} stats from last night ${data.goals}+${data.assists} and ${data.shots} shots on goal!`;
+    return getTweetTextBasicStats(data);
   } else {
-    return `@PatrikLaine29 did not play last night. Stay tuned for updates.`;
+    return getTweetTetxtNoGames();
   }
+};
+
+const getTweetTextBasicStats = (data) => {
+  const nameHashtag = `#${data.firstname}${data.lastname}`;
+  let tweetText = `${nameHashtag} stats from last night ${data.goals}+${data.assists} and ${data.shots} shots on goal!`;
   return tweetText;
+};
+
+const getTweetTetxtNoGames = () => {
+  return `@PatrikLaine29 did not play last night. Stay tuned for updates.`;
 };
 
 module.exports = {
