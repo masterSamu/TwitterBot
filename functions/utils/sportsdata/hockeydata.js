@@ -65,16 +65,25 @@ const calculateLastGameStatistics = async () => {
 
 const getTweetText = async () => {
   const data = await calculateLastGameStatistics();
+  data.nameHashtag = `#${data.firstname}${data.lastname}`;
   if (data.games > 0) {
-    return getTweetTextBasicStats(data);
+    if (data.goals === 0 && data.assists === 0 && data.shots > 2) {
+      return getTweetTextNoPointsAndMoreThan3Shots(data);
+    } else {
+      return getTweetTextBasicStats(data);
+    }
   } else {
     return getTweetTetxtNoGames();
   }
 };
 
+const getTweetTextNoPointsAndMoreThan3Shots = (data) => {
+  let tweetText = `${data.nameHashtag} shot ${data.shots} times on goal, but did not get any points`;
+  return tweetText;
+};
+
 const getTweetTextBasicStats = (data) => {
-  const nameHashtag = `#${data.firstname}${data.lastname}`;
-  let tweetText = `${nameHashtag} stats from last night ${data.goals}+${data.assists} and ${data.shots} shots on goal!`;
+  let tweetText = `${data.nameHashtag} stats from last night ${data.goals}+${data.assists} and ${data.shots} shots on goal!`;
   return tweetText;
 };
 
