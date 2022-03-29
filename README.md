@@ -6,7 +6,7 @@ Twitter bot who follow's finnish NHL player Patrik Laine. If Laine has scored in
 - Node.js
 - Firebase cloud functions
 - Twitter API
-- Sportsdata.io API
+- StatsAPI
 
 Check the Twitter account:
 https://twitter.com/PatrikLaineBot
